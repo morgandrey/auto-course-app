@@ -6,6 +6,8 @@ using System.Windows;
 using Microsoft.EntityFrameworkCore;
 using SellAutoApp.DataAccess;
 using SellAutoApp.Views.Admin;
+using SellAutoApp.Views.Client;
+using SellAutoApp.Views.Employee;
 
 namespace SellAutoApp.Views;
 
@@ -41,13 +43,20 @@ public partial class EnterView : Window {
                     case "Admin":
                         var adminUserView = new AdminUserView();
                         adminUserView.Show();
-                        Close();
                         break;
                     case "Client":
+                        var clientProfileView = new ClientProfileView();
+                        clientProfileView.Show();
+                        break;
+                    case "Employee":
+                        var employeeStatisticsView = new EmployeeStatisticsView();
+                        employeeStatisticsView.Show();
                         break;
                     default:
                         throw new Exception("Unknown role type");
                 }
+
+                Close();
 
             } else {
                 MessageBox.Show("Такого пользователя не существует");

@@ -4,14 +4,7 @@
     <projectFile>SellAutoApp/SellAutoApp.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a6de1b71-2c10-4ada-ae93-8fcd2d1c28d5" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.SellAutoApp/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/global.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SellAutoApp/App.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/SellAutoApp/App.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SellAutoApp/MainWindow.xaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SellAutoApp/MainWindow.xaml.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SellAutoApp/SellAutoApp.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/SellAutoApp/SellAutoApp.csproj" afterDir="false" />
-    </list>
+    <list default="true" id="a6de1b71-2c10-4ada-ae93-8fcd2d1c28d5" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -63,7 +56,7 @@
       <option name="presentableId" value="Default" />
       <updated>1669290320008</updated>
       <workItem from="1669290327758" duration="96000" />
-      <workItem from="1669290481771" duration="1559000" />
+      <workItem from="1669290481771" duration="2339000" />
     </task>
     <servers />
   </component>
