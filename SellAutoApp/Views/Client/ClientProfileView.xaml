@@ -27,9 +27,9 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <Label Grid.Row="1" Grid.Column="0" Content="Имя" FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            <Label Name="employeeName" Grid.Row="1" Grid.Column="1" Margin="30" FontSize="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label Name="clientName" Grid.Row="1" Grid.Column="1" Margin="30" FontSize="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
             <Label Grid.Row="2" Grid.Column="0" Content="Фамилия" FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            <Label Name="employeeSurname" Grid.Row="2" Grid.Column="1" Margin="30" FontSize="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label Name="clientSurname" Grid.Row="2" Grid.Column="1" Margin="30" FontSize="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
             <Button Grid.Row="4" Grid.ColumnSpan="2" Content="Выйти" Margin="150,40,150,40" FontSize="25" Click="LoginWindow_OnClick"/>
         </Grid>
     </Grid>
