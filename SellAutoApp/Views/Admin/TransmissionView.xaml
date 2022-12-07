@@ -1,0 +1,54 @@
+﻿<Window x:Class="SellAutoApp.Views.Admin.TransmissionView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SellAutoApp.Views.Admin"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        mc:Ignorable="d"
+        Title="Админ" Height="720" Width="1200" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.15*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <UniformGrid Background="Gray" Grid.Row="0" Rows="1">
+            <Button Content="Пользователи" Click="AdminUserView_OnClick" FontSize="25" Margin="25"/>
+            <Button Content="Регистрация" Click="RegisterView_OnClick" FontSize="25" Margin="25"/>
+            <Button Content="Модели" Click="CarModelView_OnClick" FontSize="25" Margin="25"/>
+            <Button Content="КП" IsEnabled="False" FontSize="25" Margin="25"/>
+            <Button Content="Выход" Click="Exit_OnClick" FontSize="25" Margin="25"/>
+        </UniformGrid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.4*"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="1">
+                <DataGrid Grid.Row="0" Name="transmissionDataGrid" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding Transmissions}"
+                          Margin="0,10,10,10" RowBackground="#fff" FontWeight="Bold" Foreground="#525252"
+                          ScrollViewer.CanContentScroll="True" AlternatingRowBackground="#f2f2f2" BorderBrush="#000" BorderThickness="1">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Название коробки передач" Width="*" Binding="{Binding TransmissionName}" IsReadOnly="True"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Название модели" FontSize="18"/>
+                <TextBox Name="transmissionName" Grid.Row="1" Grid.Column="1" Margin="5,10,5,10" FontSize="18" TextWrapping="Wrap" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"/>
+
+                <Button Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Margin="15" Content="Добавить" FontSize="20" Click="AddTransmission_OnClick"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

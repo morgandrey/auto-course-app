@@ -6,14 +6,18 @@
         xmlns:local="clr-namespace:SellAutoApp.Views.Admin"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
-         Title="Админ" Background="CadetBlue" Height="720" Width="1200" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize">
+        Title="Админ" Height="720" Width="1200" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.15*"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <UniformGrid Background="Gray" Grid.Row="0" Rows="1">
-            <Button Content="Сотрудники" FontSize="20" Margin="25" IsEnabled="False"/>
+            <Button Content="Пользователи" Click="AdminUserView_OnClick" FontSize="25" Margin="25"/>
+            <Button Content="Регистрация" Click="RegisterView_OnClick" FontSize="25" Margin="25"/>
+            <Button Content="Модели" IsEnabled="False" FontSize="25" Margin="25"/>
+            <Button Content="КП" Click="TransmissionView_OnClick" FontSize="25" Margin="25"/>
+            <Button Content="Выход" Click="Exit_OnClick" FontSize="25" Margin="25"/>
         </UniformGrid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
@@ -21,38 +25,19 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="83*"/>
-                    <RowDefinition Height="599*"/>
-                </Grid.RowDefinitions>
-                <UniformGrid Rows="1" Margin="0,0,0,3">
-                    <xctk:WatermarkTextBox Name="findCustomerTextBox" Margin="10,10,0,10" Watermark="Сотрудник" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" FontSize="20"/>
-                    <Button Margin="30,20,30,20" Content="Найти" FontSize="20" Click="FindCustomers_OnClick"/>
-                    <Button Margin="30,20,30,20" Content="Обновить" FontSize="20" Click="Refresh_OnClick"/>
-                </UniformGrid>
-                <DataGrid Grid.Row="1" Name="customerDataGrid" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding Users}"
-                      Margin="0,10,10,10" RowBackground="#fff" FontWeight="Bold" Foreground="#525252"
-                      ScrollViewer.CanContentScroll="True" AlternatingRowBackground="#f2f2f2" BorderBrush="#000" BorderThickness="1">
-                    <DataGrid.ContextMenu>
-                        <ContextMenu StaysOpen="True" Background="WhiteSmoke">
-                            <MenuItem Header="Удалить" Click="DeleteCustomer_Click"/>
-                        </ContextMenu>
-                    </DataGrid.ContextMenu>
+                <DataGrid Grid.Row="0" Name="carModelDataGrid" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding CarModels}"
+                          Margin="0,10,10,10" RowBackground="#fff" FontWeight="Bold" Foreground="#525252"
+                          ScrollViewer.CanContentScroll="True" AlternatingRowBackground="#f2f2f2" BorderBrush="#000" BorderThickness="1">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Фамилия" Width="*" Binding="{Binding EmployeeSurname}" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="Имя" Width="*" Binding="{Binding EmployeeName}" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="Отчество" Width="*" Binding="{Binding EmployeePatronymic}" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="Должность" Width="*" Binding="{Binding IdEmployeePositionNavigation.EmployeePositionName}" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="Логин" Width="*" Binding="{Binding EmployeeLogin}"/>
-                        <DataGridTextColumn Header="Пароль" Width="*" Binding="{Binding EmployeePassword}"/>
+                        <DataGridTextColumn Header="Название модели" Width="*" Binding="{Binding CarModelName}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Производитель" Width="*" Binding="{Binding Manufacturer.ManufacturerName}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Цвет" Width="*" Binding="{Binding Color.ColorName}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Коробка передач" Width="*" Binding="{Binding Transmission.TransmissionName}" IsReadOnly="True"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>
             <Grid Grid.Column="0">
                 <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
@@ -64,23 +49,17 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Label Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Имя" FontSize="20"/>
-                <TextBox Name="customerName" Grid.Row="1" Grid.Column="1" Margin="5,10,5,10" FontSize="18" TextWrapping="Wrap" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"/>
-                <Label Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Фамилия" FontSize="20"/>
-                <TextBox Name="customerSurname" Grid.Row="0" Grid.Column="1" Margin="5,10,5,10" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
-                <Label Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Отчество" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"/>
-                <TextBox Name="customerPatronymic" Grid.Row="2" Grid.Column="1" Margin="5,10,5,10" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" FontSize="19"/>
-                <Label Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Телефон" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"/>
-                <TextBox Name="customerPhone" Grid.Row="3" Grid.Column="1" Margin="5,10,5,10" FontSize="17" TextWrapping="Wrap"/>
-                <Label Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Должность" FontSize="20"/>
-                <ComboBox Name="customerTypeComboBox" Grid.Row="4" Grid.Column="1" Margin="5,10,5,10" FontSize="17" ItemsSource="{Binding CustomerTypes}" SelectedValuePath="IdEmployeePosition" DisplayMemberPath="EmployeePositionName" IsEditable="True" IsSynchronizedWithCurrentItem="True"/>
-                <Label Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Логин" FontSize="20"/>
-                <TextBox Name="customerLogin" Grid.Row="5" Grid.Column="1" Margin="5,10,5,10" FontSize="17" TextWrapping="Wrap" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"/>
-                <Label Grid.Row="6" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Пароль" FontSize="20"/>
-                <TextBox Name="customerPassword" Grid.Row="6" Grid.Column="1" Margin="5,10,5,10" FontSize="17" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"/>
-                <Label Grid.Row="7" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" Content="Магазин"/>
-                <ComboBox Name="funeralServiceComboBox" Grid.Row="7" Grid.Column="1" Margin="5,10,5,10" FontSize="17" ItemsSource="{Binding FuneralServices}" SelectedValuePath="IdFuneralService" DisplayMemberPath="FuneralServiceName" IsEditable="True" IsSynchronizedWithCurrentItem="True" />
-                <Button Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" Margin="15" Content="Добавить продавца" FontSize="20" Click="AddCustomer_OnClick"/>
+                <Label Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Название модели" FontSize="18"/>
+                <TextBox Name="carModelName" Grid.Row="0" Grid.Column="1" Margin="5,10,5,10" FontSize="18" TextWrapping="Wrap" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"/>
+                <Label Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Производитель" FontSize="20"/>
+                <ComboBox Name="manufacturerComboBox" Grid.Row="1" Grid.Column="1" Margin="5,10,5,10" FontSize="17" ItemsSource="{Binding Manufacturers}" SelectedValuePath="ManufacturerId" DisplayMemberPath="ManufacturerName" IsEditable="True" IsSynchronizedWithCurrentItem="True"/>
+                <Label Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Цвет" FontSize="20"/>
+                <ComboBox Name="colorComboBox" Grid.Row="2" Grid.Column="1" Margin="5,10,5,10" FontSize="17" ItemsSource="{Binding Colors}" SelectedValuePath="ColorId" DisplayMemberPath="ColorName" IsEditable="True" IsSynchronizedWithCurrentItem="True"/>
+                <Label Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Коробка передач" FontSize="20"/>
+                <ComboBox Name="transmissionComboBox" Grid.Row="3" Grid.Column="1" Margin="5,10,5,10" FontSize="17" ItemsSource="{Binding Transmissions}" SelectedValuePath="TransmissionId" DisplayMemberPath="TransmissionName" IsEditable="True" IsSynchronizedWithCurrentItem="True"/>
+                <Label Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Стоимость" FontSize="20"/>
+                <xctk:IntegerUpDown Value="0" Minimum="0" Name="modelPrice" Grid.Row="4" Grid.Column="1" Margin="5,10,5,10" FontSize="17"/>
+                <Button Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Margin="15" Content="Добавить" FontSize="20" Click="AddCarModel_OnClick"/>
             </Grid>
         </Grid>
     </Grid>

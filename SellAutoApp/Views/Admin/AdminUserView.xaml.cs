@@ -55,4 +55,23 @@ public partial class AdminUserView : Window, INotifyPropertyChanged
     {
         Application.Current.Shutdown();
     }
+
+    private void CarModelView_OnClick(object sender, RoutedEventArgs e)
+    {
+        var carModelView = new CarModelView();
+        carModelView.Show();
+        Close();
+    }
+
+    private void RegisterView_OnClick(object sender, RoutedEventArgs e) {
+        var registerView = new RegisterView();
+        registerView.Show();
+        Close();
+    }
+
+    private void TransmissionView_OnClick(object sender, RoutedEventArgs e) {
+        var transmissionView = new TransmissionView();
+        transmissionView.Show();
+        Close();
+    }
 }

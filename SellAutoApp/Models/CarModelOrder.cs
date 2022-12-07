@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace SellAutoApp.Models;
+﻿namespace SellAutoApp.Models;
 
 public partial class CarModelOrder
 {
