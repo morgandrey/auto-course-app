@@ -1,0 +1,32 @@
+﻿<Window x:Class="SellAutoApp.Views.Client.CatalogView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SellAutoApp.Views.Client"
+        mc:Ignorable="d"
+        Title="Каталог" Height="720" Width="1200" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.15*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <UniformGrid Background="Gray" Grid.Row="0" Rows="1">
+            <Button Content="Профиль" Click="ProfileView_OnClick" FontSize="25" Margin="25"/>
+            <Button Content="Каталог" IsEnabled="False" FontSize="25" Margin="25"/>
+            <Button Content="Выход" Click="Exit_OnClick" FontSize="25" Margin="25"/>
+        </UniformGrid>
+        <Grid Grid.Row="1">
+            <DataGrid Name="carModelDataGrid" Grid.Column="1" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding CarModels}"
+                      Margin="10" HorizontalAlignment="Stretch" RowBackground="#fff" FontWeight="Bold" Foreground="#525252"
+                      ScrollViewer.CanContentScroll="True" AlternatingRowBackground="#f2f2f2" BorderBrush="#000" BorderThickness="1" Height="713">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Название модели" Width="*" Binding="{Binding CarModelName}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Производитель" Width="*" Binding="{Binding Manufacturer.ManufacturerName}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Цвет" Width="*" Binding="{Binding Color.ColorName}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Коробка передач" Width="*" Binding="{Binding Transmission.TransmissionName}" IsReadOnly="True"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </Grid>
+</Window>

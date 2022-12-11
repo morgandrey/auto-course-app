@@ -5,6 +5,7 @@ using System.Text;
 using System.Windows;
 using Microsoft.EntityFrameworkCore;
 using SellAutoApp.DataAccess;
+using SellAutoApp.Models;
 using SellAutoApp.Views.Admin;
 using SellAutoApp.Views.Client;
 using SellAutoApp.Views.Employee;
@@ -12,6 +13,8 @@ using SellAutoApp.Views.Employee;
 namespace SellAutoApp.Views;
 
 public partial class EnterView : Window {
+
+    public static User CurrentUser { get; set; }
     public EnterView() {
         InitializeComponent();
     }
@@ -29,7 +32,7 @@ public partial class EnterView : Window {
             using var context = new SellCarDbContext();
             var user = context.Users
                 .Include(x => x.UserRole)
-                .FirstOrDefault(x => x.UserName == login.Text);
+                .FirstOrDefault(x => x.UserLogin == login.Text);
             if (user != null) {
                 var generatedHash = GenerateHash(Encoding.UTF8.GetBytes(password.Password));
                 var hash = Convert.FromBase64String(user.UserHash);
@@ -37,6 +40,8 @@ public partial class EnterView : Window {
                     MessageBox.Show("Неправильный пароль");
                     return;
                 }
+
+                CurrentUser = user;
 
                 switch (user.UserRole.UserRoleName)
                 {
@@ -55,7 +60,6 @@ public partial class EnterView : Window {
                     default:
                         throw new Exception("Unknown role type");
                 }
-
                 Close();
 
             } else {

@@ -5,8 +5,26 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SellAutoApp.Views.Employee"
         mc:Ignorable="d"
-        Title="EmployeeStatisticsView" Height="450" Width="800">
+        Title="Статистика" Height="720" Width="1200" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.15*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <UniformGrid Background="Gray" Grid.Row="0" Rows="1">
+            <Button Content="Статистика" IsEnabled="False" FontSize="25" Margin="25"/>
+            <Button Content="Выход" Click="Exit_OnClick" FontSize="25" Margin="25"/>
+        </UniformGrid>
+        <Grid Grid.Row="1">
+            <DataGrid Name="statisticDataGrid" Grid.Column="1" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding CarModels}"
+                      Margin="10" HorizontalAlignment="Stretch" RowBackground="#fff" FontWeight="Bold" Foreground="#525252"
+                      ScrollViewer.CanContentScroll="True" AlternatingRowBackground="#f2f2f2" BorderBrush="#000" BorderThickness="1" Height="713">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Пользователь" Width="*" Binding="{Binding CarModelName}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Модель" Width="*" Binding="{Binding Manufacturer.ManufacturerName}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Дата продажи" Width="*" Binding="{Binding Manufacturer.ManufacturerName}" IsReadOnly="True"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
     </Grid>
 </Window>

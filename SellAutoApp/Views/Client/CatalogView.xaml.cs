@@ -1,11 +1,25 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using Microsoft.EntityFrameworkCore;
+using SellAutoApp.DataAccess;
+using SellAutoApp.Models;
 
 namespace SellAutoApp.Views.Client {
-    public partial class ClientProfileView : Window, INotifyPropertyChanged {
-        public ClientProfileView() {
+    public partial class CatalogView : Window, INotifyPropertyChanged {
+        private ObservableCollection<CarModel> _carModels;
+        public ObservableCollection<CarModel> CarModels {
+            get => _carModels;
+            set {
+                _carModels = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public CatalogView() {
             InitializeComponent();
             DataContext = this;
             LoadData();
@@ -13,8 +27,12 @@ namespace SellAutoApp.Views.Client {
 
         private void LoadData()
         {
-            clientName.Content = EnterView.CurrentUser.UserName;
-            clientSurname.Content = EnterView.CurrentUser.UserSurname;
+            using var dbContext = new SellCarDbContext();
+            CarModels = new ObservableCollection<CarModel>(dbContext.CarModels
+                .Include(x => x.Transmission)
+                .Include(x => x.Manufacturer)
+                .Include(x => x.Color)
+                .ToList());
         }
 
         private void Exit_OnClick(object sender, RoutedEventArgs e)
@@ -37,17 +55,10 @@ namespace SellAutoApp.Views.Client {
             return true;
         }
 
-        private void LoginWindow_OnClick(object sender, RoutedEventArgs e)
+        private void ProfileView_OnClick(object sender, RoutedEventArgs e)
         {
-            var enterView = new EnterView();
-            enterView.Show();
-            Close();
-        }
-
-        private void CatalogView_OnClick(object sender, RoutedEventArgs e)
-        {
-            var catalogView = new CatalogView();
-            catalogView.Show();
+            var profileView = new ClientProfileView();
+            profileView.Show();
             Close();
         }
     }

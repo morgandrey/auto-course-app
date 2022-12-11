@@ -12,6 +12,8 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <UniformGrid Background="Gray" Grid.Row="0" Rows="1">
+            <Button Content="Профиль" IsEnabled="False" FontSize="25" Margin="25"/>
+            <Button Content="Каталог" Click="CatalogView_OnClick" FontSize="25" Margin="25"/>
             <Button Content="Выход" Click="Exit_OnClick" FontSize="25" Margin="25"/>
         </UniformGrid>
         <Grid Grid.Row="1">

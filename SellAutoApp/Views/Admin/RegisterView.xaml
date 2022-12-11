@@ -24,20 +24,23 @@
                 <RowDefinition/>
                 <RowDefinition/>
                 <RowDefinition/>
+                <RowDefinition/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Label Grid.Row="0" Grid.Column="0" Content="Логин" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="25"/>
-            <TextBox Name="login" Grid.Row="0" Grid.Column="1" Margin="10,35,10,35" FontSize="25" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"/>
+            <TextBox Name="login" Grid.Row="0" Grid.Column="1" Margin="10,25,10,25" FontSize="25" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"/>
             <Label Grid.Row="1" Grid.Column="0" Content="Пароль" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="25"/>
-            <PasswordBox Name="password" Grid.Row="1" Grid.Column="1" Margin="10,35,10,35" FontSize="25" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"/>
+            <PasswordBox Name="password" Grid.Row="1" Grid.Column="1" Margin="10,25,10,25" FontSize="25" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"/>
             <Label Grid.Row="2" Grid.Column="0" Content="Имя" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="25"/>
-            <TextBox Name="name" Grid.Row="2" Grid.Column="1" Margin="10,35,10,35" FontSize="25" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"/>
+            <TextBox Name="name" Grid.Row="2" Grid.Column="1" Margin="10,25,10,25" FontSize="25" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"/>
             <Label Grid.Row="3" Grid.Column="0" Content="Фамилия" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="25"/>
-            <TextBox Name="surname" Grid.Row="3" Grid.Column="1" Margin="10,35,10,35" FontSize="25" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"/>
-            <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Margin="40" Content="Зарегистрировать" FontSize="25" Background="Green" Click="Register_OnClick"/>
+            <TextBox Name="surname" Grid.Row="3" Grid.Column="1" Margin="10,25,10,25" FontSize="25" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"/>
+            <Label Grid.Row="4" Grid.Column="0" Content="Роль" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="25"/>
+            <ComboBox Name="roleComboBox" Grid.Row="4" Grid.Column="1" Margin="5,10,5,10" FontSize="17" ItemsSource="{Binding UserRoles}" SelectedValuePath="UserRoleId" DisplayMemberPath="UserRoleName" IsEditable="True" IsSynchronizedWithCurrentItem="True"/>
+            <Button Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Margin="20" Content="Зарегистрировать" FontSize="25" Background="Green" Click="Register_OnClick"/>
         </Grid>
     </Grid>
 </Window>

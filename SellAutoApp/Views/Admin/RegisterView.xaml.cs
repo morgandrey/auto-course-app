@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Text;
@@ -10,9 +12,19 @@ using SellAutoApp.Models;
 
 namespace SellAutoApp.Views.Admin {
     public partial class RegisterView : Window, INotifyPropertyChanged {
+        private ObservableCollection<UserRole> _userRoles;
+        public ObservableCollection<UserRole> UserRoles {
+            get => _userRoles;
+            set {
+                _userRoles = value;
+                OnPropertyChanged();
+            }
+        }
         public RegisterView() {
             InitializeComponent();
             DataContext = this;
+            using var dbContext = new SellCarDbContext();
+            UserRoles = new ObservableCollection<UserRole>(dbContext.UserRoles.ToList());
         }
 
         private void CarModelView_OnClick(object sender, RoutedEventArgs e) {
@@ -53,7 +65,7 @@ namespace SellAutoApp.Views.Admin {
                     UserSurname = surname.Text,
                     UserLogin = login.Text,
                     UserHash = Convert.ToBase64String(generatedHash),
-                    UserRoleId = 3
+                    UserRoleId = (int)roleComboBox.SelectedValue
                 };
                 dbContext.Add(user);
                 dbContext.SaveChanges();
@@ -75,8 +87,7 @@ namespace SellAutoApp.Views.Admin {
             return algorithm.ComputeHash(plainTextWithSaltBytes);
         }
 
-        private void TransmissionView_OnClick(object sender, RoutedEventArgs e)
-        {
+        private void TransmissionView_OnClick(object sender, RoutedEventArgs e) {
             var transmissionView = new TransmissionView();
             transmissionView.Show();
             Close();
