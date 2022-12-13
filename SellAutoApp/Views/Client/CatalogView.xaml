@@ -25,6 +25,14 @@
                     <DataGridTextColumn Header="Производитель" Width="*" Binding="{Binding Manufacturer.ManufacturerName}" IsReadOnly="True"/>
                     <DataGridTextColumn Header="Цвет" Width="*" Binding="{Binding Color.ColorName}" IsReadOnly="True"/>
                     <DataGridTextColumn Header="Коробка передач" Width="*" Binding="{Binding Transmission.TransmissionName}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Стоимость" Width="*" Binding="{Binding CarModelPrices[0].CarModelPrice1}" IsReadOnly="True"/>
+                    <DataGridTemplateColumn Width="*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Click="CreateOrder_OnClick">Заказать</Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>

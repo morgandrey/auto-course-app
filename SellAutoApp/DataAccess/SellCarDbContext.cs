@@ -7,6 +7,7 @@ public partial class SellCarDbContext : DbContext
 {
     public SellCarDbContext()
     {
+        Database.EnsureCreated();
     }
 
     public SellCarDbContext(DbContextOptions<SellCarDbContext> options)

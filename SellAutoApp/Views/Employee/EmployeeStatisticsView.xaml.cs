@@ -1,14 +1,39 @@
-﻿using System.Collections.Generic;
+﻿using SellAutoApp.Models;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using Microsoft.EntityFrameworkCore;
+using SellAutoApp.DataAccess;
 
 namespace SellAutoApp.Views.Employee;
 
 public partial class EmployeeStatisticsView : Window, INotifyPropertyChanged {
+
+    private ObservableCollection<CarModelOrder> _carModelOrders;
+    public ObservableCollection<CarModelOrder> CarModelOrders {
+        get => _carModelOrders;
+        set {
+            _carModelOrders = value;
+            OnPropertyChanged();
+        }
+    }
     public EmployeeStatisticsView() {
         InitializeComponent();
         DataContext = this;
+        LoadData();
+    }
+
+    private void LoadData()
+    {
+        using var dbContext = new SellCarDbContext();
+        CarModelOrders = new ObservableCollection<CarModelOrder>(dbContext.CarModelOrders
+            .Include(x => x.Order.User)
+            .Include(x => x.CarModel)
+            .ThenInclude(x => x.CarModelPrices)
+            .ToList());
     }
 
     private void Exit_OnClick(object sender, RoutedEventArgs e)
