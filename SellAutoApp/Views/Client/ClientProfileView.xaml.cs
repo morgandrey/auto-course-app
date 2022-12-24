@@ -3,52 +3,52 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 
-namespace SellAutoApp.Views.Client {
-    public partial class ClientProfileView : Window, INotifyPropertyChanged {
-        public ClientProfileView() {
-            InitializeComponent();
-            DataContext = this;
-            LoadData();
-        }
+namespace SellAutoApp.Views.Client;
 
-        private void LoadData()
-        {
-            clientName.Content = EnterView.CurrentUser.UserName;
-            clientSurname.Content = EnterView.CurrentUser.UserSurname;
-        }
+public partial class ClientProfileView : Window, INotifyPropertyChanged {
+    public ClientProfileView() {
+        InitializeComponent();
+        DataContext = this;
+        LoadData();
+    }
 
-        private void Exit_OnClick(object sender, RoutedEventArgs e)
-        {
-            Application.Current.Shutdown();
-        }
+    private void LoadData()
+    {
+        clientName.Content = EnterView.CurrentUser.UserName;
+        clientSurname.Content = EnterView.CurrentUser.UserSurname;
+    }
 
-        public event PropertyChangedEventHandler? PropertyChanged;
+    private void Exit_OnClick(object sender, RoutedEventArgs e)
+    {
+        Application.Current.Shutdown();
+    }
 
-        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+    public event PropertyChangedEventHandler? PropertyChanged;
 
-        protected bool SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
-        {
-            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
-            field = value;
-            OnPropertyChanged(propertyName);
-            return true;
-        }
+    protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
 
-        private void LoginWindow_OnClick(object sender, RoutedEventArgs e)
-        {
-            var enterView = new EnterView();
-            enterView.Show();
-            Close();
-        }
+    protected bool SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
+    {
+        if (EqualityComparer<T>.Default.Equals(field, value)) return false;
+        field = value;
+        OnPropertyChanged(propertyName);
+        return true;
+    }
 
-        private void CatalogView_OnClick(object sender, RoutedEventArgs e)
-        {
-            var catalogView = new CatalogView();
-            catalogView.Show();
-            Close();
-        }
+    private void LoginWindow_OnClick(object sender, RoutedEventArgs e)
+    {
+        var enterView = new EnterView();
+        enterView.Show();
+        Close();
+    }
+
+    private void CatalogView_OnClick(object sender, RoutedEventArgs e)
+    {
+        var catalogView = new CatalogView();
+        catalogView.Show();
+        Close();
     }
 }

@@ -23,7 +23,9 @@
                       Margin="10" HorizontalAlignment="Stretch" RowBackground="#fff" FontWeight="Bold" Foreground="#525252"
                       ScrollViewer.CanContentScroll="True" AlternatingRowBackground="#f2f2f2" BorderBrush="#000" BorderThickness="1" Height="713">
                 <DataGrid.Columns>
+                    <DataGridTextColumn Header="Имя пользователя" Width="*" Binding="{Binding UserLogin}" IsReadOnly="True"/>
                     <DataGridTextColumn Header="Имя пользователя" Width="*" Binding="{Binding UserName}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Роль" Width="*" Binding="{Binding UserRole.UserRoleName}" IsReadOnly="True"/>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>

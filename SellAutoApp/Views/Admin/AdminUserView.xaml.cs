@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using Microsoft.EntityFrameworkCore;
 using SellAutoApp.DataAccess;
 using SellAutoApp.Models;
 
@@ -33,7 +34,9 @@ public partial class AdminUserView : Window, INotifyPropertyChanged
     private void LoadData()
     {
         using var context = new SellCarDbContext();
-        Users = new ObservableCollection<User>(context.Users.ToList());
+        Users = new ObservableCollection<User>(context.Users
+            .Include(x => x.UserRole)
+            .ToList());
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;
